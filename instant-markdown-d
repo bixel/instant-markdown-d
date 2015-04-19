@@ -93,19 +93,15 @@ io.sockets.on('connection', function(sock){
   process.stdin.resume();
 });
 
-
-if (process.platform.toLowerCase().indexOf('darwin') >= 0){
-  exec('open -g http://localhost:8090', function(error, stdout, stderr){});
+var openCommand;
+if (argv.browser === undefined) {
+  if (process.platform.toLowerCase().indexOf('darwin') >= 0) {
+    openCommand = 'open -g http://localhost:8090';
+  } else { // assume unix/linux
+    openCommand = 'xdg-open http://localhost:8090';
+  }
+} else {
+  openCommand = argv.browser + ' http://localhost:8090';
 }
-else {  // assume unix/linux
-  argv.browser || (argv.browser = 'xdg-open');
-  exec(argv.browser + ' http://localhost:8090', function(error, stdout, stderr) {
-    if (error !== null) {
-      if (argv.browser === 'xdg-open') {
-        process.exit(1);
-      }
 
-      exec('xdg-open http://localhost:8090', function(error, stdout, stderr){});
-    }
-  });
-}
+exec(openCommand, function(error, stdout, stderr){});
