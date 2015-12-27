@@ -56,6 +56,15 @@ function httpHandler(req, res) {
         return;
       }
 
+	  var imageUrl = req.url.match(/^\/figures\/.+\.(png|jpg|gif)$/);
+	  if (imageUrl) {
+         // Serve the file out of the current working directory
+        send(req, imageUrl[0])
+         .root(process.cwd())
+         .pipe(res);
+        return;
+	  }
+
       // Otherwise serve the file from the directory this module is in
       send(req, req.url)
         .root(__dirname)
