@@ -13,6 +13,7 @@
     "highlight.js": "^8.4.0",
     "markdown-it": "^3.0.3",
     "optimist": "~0.6.1",
+    "parse-katex": "^0.3.0",
     "send": "~0.1.0",
     "socket.io": ""
   }

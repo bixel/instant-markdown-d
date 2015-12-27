@@ -2,6 +2,7 @@
 ':' //; exec "`command -v nodejs || command -v node`" "$0" "$*"
 
 var MarkdownIt = require('markdown-it');
+var katex = require('parse-katex');
 var hljs = require('highlight.js');
 var server = require('http').createServer(httpHandler),
     exec = require('child_process').exec,
@@ -38,7 +39,9 @@ function writeMarkdown(input, output) {
     }
   });
   input.on('end', function() {
-    output.emit('newContent', md.render(body));
+    var parsed = md.render(body);
+    var texed = katex.render(parsed);
+    output.emit('newContent', texed);
   });
 }
 
