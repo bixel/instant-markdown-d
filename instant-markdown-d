@@ -182,5 +182,3 @@ function onServerError(e) {
   // Another unexpected error. Raise it again.
   throw e;
 }
-
-exec(openCommand, function(error, stdout, stderr){});
