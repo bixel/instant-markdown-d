@@ -15,6 +15,6 @@
     "optimist": "~0.6.1",
     "parse-katex": "^0.3.0",
     "send": "~0.1.0",
-    "socket.io": ""
+    "socket.io": "^1.4.5"
   }
 }
